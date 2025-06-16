@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Task Timer",
+  "version": "1.0",
+  "description": "Controle de tempo por tarefa",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage"]
+}

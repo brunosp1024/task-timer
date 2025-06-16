@@ -1,0 +1,174 @@
+body {
+  width: 500px;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f8ff;
+  color: #333;
+  user-select: none;
+  border-radius: 8px;
+}
+
+h2 {
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+}
+
+input#taskName {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+input#taskName:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+}
+
+button#addTask {
+  width: 12%;
+  background: #4a90e2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+button#addTask:hover {
+  background: #357abd;
+}
+
+ul#taskList {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+ul#taskList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 10px;
+  padding: 10px 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.07);
+  transition: box-shadow 0.3s;
+}
+
+ul#taskList li:hover {
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+}
+
+.task-name {
+  font-weight: 600;
+  color: #222;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.task-time {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  color: #4a90e2;
+  text-align: center;
+  margin: 0 15px;
+  padding: 6px 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.task-buttons {
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.task-buttons button {
+  font-size: 20px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #666;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.task-buttons button:hover {
+  background-color: #4a90e2;
+  color: white;
+  box-shadow: 0 2px 6px rgba(74,144,226,0.6);
+}
+
+input[type="text"] {
+  font-size: 16px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 150px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 8px rgba(74, 144, 226, 0.4);
+}
+
+.inline-edit-input {
+  font-size: 16px;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid #4a90e2;
+  box-sizing: border-box;
+}
+
+.task-buttons button {
+  font-size: 16px;
+  padding: 2px 6px;
+  margin: 0 2px;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+}
+
+hr {
+  border: none;
+  border-top: 2px solid #eee;
+  margin: 16px 0;
+}
+
+.task-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.task-input-row input {
+  flex: 1;
+  width: 100%;
+}
+
+.inline-edit-input-time {
+  font-family: monospace;
+  font-size: 1em;
+  width: 80px;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
