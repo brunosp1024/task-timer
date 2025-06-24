@@ -1,5 +1,4 @@
-const reportList = document.getElementById('reportList')
-
+let reportList = document.getElementById('reportList')
 let report = []
 
 
@@ -7,14 +6,8 @@ let report = []
 const loadReport = () => {
   chrome.storage.local.get('report', data => {
     report = data.report || []
-    renderReport()
+    renderReport(report)
   })
-}
-
-
-// Save report to storage
-const saveReportState = () => {
-  chrome.storage.local.set({ report })
 }
 
 
@@ -26,19 +19,21 @@ const saveReport = (tasks) => {
 
   const reportEntries = tasks.map(t => ({
     name: t.name,
-    time: parseInt(t.total / 1000),
+    time: parseInt(t.total + (t.running ? Date.now() - t.start : 0) / 1000),
     date: today
   }))
+
   report.push(...reportEntries)
+  chrome.storage.local.set({ report })
 
-  saveReportState()
+  renderReport(report)
 
-  alert('Dia encerrado! As tarefas foram pausadas e salvas no relatório.')
+  alert('Dia encerrado! As tarefas foram salvas no relatório.')
 }
 
 
 // Render report
-const renderReport = () => {
+const renderReport = (report) => {
   const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
   reportList.innerHTML = ''
   if (report.length === 0) {
@@ -67,8 +62,8 @@ const formatTime = secs => {
     .padStart(2, '0')}:${s.toString().padStart(2, '0')}`
 }
 
+
 export {
-  renderReport,
   loadReport,
   saveReport
 }

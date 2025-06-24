@@ -1,4 +1,4 @@
-import { loadReport, renderReport, saveReport} from './report.js'
+import { loadReport, saveReport} from './report.js'
 
 const taskNameInput = document.getElementById("taskName")
 const addTaskBtn = document.getElementById("addTask")
@@ -23,14 +23,8 @@ function loadTasks() {
 }
 
 
-// Save tasks and report to storage
-const saveTasksState = () => {
-  chrome.storage.local.set({ tasks })
-}
-
-
 function saveAndRenderTasks() {
-  saveTasksState()
+  chrome.storage.local.set({ tasks })
   renderTasks()
 }
 
@@ -252,7 +246,7 @@ addTaskBtn.addEventListener("click", () => {
 // Report button
 reportBtn.addEventListener('click', () => {
   showView('report');
-  renderReport();
+  loadReport();
 });
 
 
