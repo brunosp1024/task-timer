@@ -13,7 +13,7 @@ const loadReport = () => {
 
 // Save report to storage
 const saveReport = (tasks) => {
-  const today = new Date().toISOString().split('T')[0]
+  const today = new Date().toLocaleDateString('en-CA')
   const namesHoje = tasks.map(t => t.name)
   report = report.filter(r => r.date !== today || !namesHoje.includes(r.name))
 

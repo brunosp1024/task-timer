@@ -19,7 +19,7 @@ function saveReportSnapshot() {
     const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
     const tasks = Object.values(data.tasks) || []
     let report = data.report || []
-    const today = new Date().toISOString().split('T')[0]
+    const today = new Date().toLocaleDateString('en-CA')
     const namesHoje = tasks.map(t => t.name)
     report = report.filter(r => r.date !== today || !namesHoje.includes(r.name))
 
