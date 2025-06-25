@@ -17,16 +17,18 @@ const saveReport = (tasks) => {
   const namesHoje = tasks.map(t => t.name)
   report = report.filter(r => r.date !== today || !namesHoje.includes(r.name))
 
-  const reportEntries = tasks.map(t => ({
+  const reportEntries = tasks
+  .filter(t => (t.total + (t.running ? Date.now() - t.start : 0)) > 0)
+  .map(t => ({
     name: t.name,
-    time: parseInt(t.total + (t.running ? Date.now() - t.start : 0) / 1000),
+    time: parseInt((t.total + (t.running ? Date.now() - t.start : 0)) / 1000),
     date: today
   }))
 
-  report.push(...reportEntries)
-  chrome.storage.local.set({ report })
-
-  renderReport(report)
+  if (reportEntries.length > 0) {
+    report.push(...reportEntries)
+    chrome.storage.local.set({ report })
+  }
 
   alert('Dia encerrado! As tarefas foram salvas no relatório.')
 }
