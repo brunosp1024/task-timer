@@ -8,8 +8,10 @@ const resetTasksBtn = document.getElementById('resetTasksBtn')
 const actions = document.getElementById('taskActions')
 const reportBtn = document.getElementById('reportBtn')
 const mainBtn = document.getElementById('mainBtn')
+const settingsBtn = document.getElementById('settingsBtn')
 const reportView = document.getElementById('reportView')
 const mainView = document.getElementById('mainView')
+const settingsView = document.getElementById('settingsView')
 
 let tasks = {}
 
@@ -255,13 +257,21 @@ mainBtn.addEventListener('click', () => {
   showView('main');
 })
 
+// Settings button
+settingsBtn.addEventListener('click', () => {
+  showView('settings');
+})
+
 
 // Show/hide views
 function showView(view) {
   mainView.style.display = view === 'main' ? 'block' : 'none';
   reportView.style.display = view === 'report' ? 'block' : 'none';
-  reportBtn.style.display = view === 'main' ? 'block' : 'none';
-  mainBtn.style.display = view === 'report' ? 'block' : 'none';
+  settingsView.style.display = view === 'settings' ? 'block' : 'none';
+
+  mainBtn.classList.toggle('active', view === 'main');
+  reportBtn.classList.toggle('active', view === 'report');
+  settingsBtn.classList.toggle('active', view === 'settings');
 }
 
 
@@ -288,3 +298,4 @@ resetTasksBtn.addEventListener('click', () => {
 
 loadTasks()
 loadReport()
+showView('main')
