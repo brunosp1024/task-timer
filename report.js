@@ -46,13 +46,40 @@ const renderReport = (report) => {
     return
   }
 
+  // group by date
+  const grouped = {}
   report
     .filter(entry => new Date(entry.date).getTime() >= sevenDaysAgo)
     .forEach(entry => {
+      if (!grouped[entry.date]) grouped[entry.date] = []
+      grouped[entry.date].push(entry)
+    })
+
+  // Sort dates from newest to oldest
+  const sortedDates = Object.keys(grouped).sort((a, b) => new Date(b) - new Date(a))
+
+  sortedDates.forEach(date => {
+    // Date title
+    const dateTitle = document.createElement('h4')
+    dateTitle.textContent = date.split('-').reverse().join('/')
+    dateTitle.style.marginTop = '12px'
+    reportList.appendChild(dateTitle)
+
+    // List of tasks for the day
+    grouped[date].forEach(entry => {
       const li = document.createElement('li')
-      li.textContent = `${entry.name} - ${formatTime(entry.time)} (${entry.date.split('-').reverse().join('/')})`
+      // Create a span for the task name
+      const nameSpan = document.createElement('span')
+      nameSpan.textContent = entry.name
+      // Create a span for the time, bold and left-aligned
+      const timeSpan = document.createElement('span')
+      timeSpan.innerHTML = "Tempo gasto ➡ " + formatTime(entry.time)
+      timeSpan.className = 'task-report'
+      li.appendChild(nameSpan)
+      li.appendChild(timeSpan)
       reportList.appendChild(li)
     })
+  })
 }
 
 // Format time to HH:MM:SS
