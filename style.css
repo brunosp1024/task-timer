@@ -52,6 +52,17 @@ input[type="text"]:focus {
   border-top: 1px solid #dddddd;
 }
 
+.area-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.area-title span {
+  font-weight: 600;
+  color: #555;
+}
+
 /* =========== END GENERAL =========== */
 
 
