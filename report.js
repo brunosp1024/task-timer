@@ -36,7 +36,6 @@ const saveReport = (tasks) => {
 
 // Render report
 const renderReport = (report) => {
-  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
   reportList.innerHTML = ''
   if (report.length === 0) {
     const emptyMsg = document.createElement("p")
@@ -49,7 +48,6 @@ const renderReport = (report) => {
   // group by date
   const grouped = {}
   report
-    .filter(entry => new Date(entry.date).getTime() >= sevenDaysAgo)
     .forEach(entry => {
       if (!grouped[entry.date]) grouped[entry.date] = []
       grouped[entry.date].push(entry)
