@@ -1,4 +1,5 @@
 let reportList = document.getElementById('reportList')
+let downloadReportBtn = document.getElementById('downloadReportBtn')
 let report = []
 
 
@@ -10,6 +11,10 @@ const loadReport = () => {
   })
 }
 
+// Report download button
+downloadReportBtn.addEventListener('click', () => {
+  downloadReport()
+})
 
 // Save report to storage
 const saveReport = (tasks) => {
@@ -89,8 +94,35 @@ const formatTime = secs => {
     .padStart(2, '0')}:${s.toString().padStart(2, '0')}`
 }
 
+// Download report as CSV
+const downloadReport = () => {
+  chrome.storage.local.get('report', data => {
+    const report = data.report || []
+    if (report.length === 0) {
+      alert('Nenhum relatório disponível para download.')
+      return
+    }
+    // CSV header
+    const header = ['Nome', 'Tempo gasto', 'Data']
+    const rows = report.map(
+      entry => [entry.name, formatTime(entry.time), entry.date.split('-').reverse().join('/')])
+    const csvContent = [header, ...rows]
+      .map(e => e.join(','))
+      .join('\n')
+    const blob = new Blob([csvContent], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'relatorio.csv'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  })
+}
 
 export {
   loadReport,
-  saveReport
+  saveReport,
+  downloadReport
 }
